@@ -61,6 +61,9 @@ class TestQuery(TestCase):
         self.assertEqual(dummy.name, 'bar')
         dummys = Dummy.query.filter(Dummy.name.in_(['bar', 'xx'])).all()
         self.assertEqual(len(dummys), 2)
+        names = ['bar', 'xx']
+        dummys = Dummy.query.filter(lambda x: x.name in names).all()
+        self.assertEqual(len(dummys), 2)
 
     def test_multi_filter(self):
         self.create_dummys()
